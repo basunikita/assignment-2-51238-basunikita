@@ -24,6 +24,18 @@ npm test        # clean static build, then the checks in tests/
 npm run build   # static export to out/
 ```
 
+## Photos
+
+Mood-board photos are free Unsplash photos saved into `public/mood-boards/<mood>/`. The script
+refuses Unsplash+ photos and prints the entry for `app/mood-boards/<mood>/photos.ts`:
+
+```bash
+scripts/unsplash.sh search "treadmill window"
+scripts/unsplash.sh get calm <photo-id> treadmill-window
+```
+
+Rewrite each printed `alt` by hand so it describes the photo plainly.
+
 ## Installing on the IMC network
 
 The public npm registry is blocked there, so point npm at the internal mirror for each
