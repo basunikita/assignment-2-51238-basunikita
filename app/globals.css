@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mood tokens: a board sets --mood-* on its root (moodStyle in app/moods.ts). */
+@theme inline {
+  --color-bg: var(--mood-bg);
+  --color-surface: var(--mood-surface);
+  --color-ink: var(--mood-ink);
+  --color-muted: var(--mood-muted);
+  --color-line: var(--mood-line);
+  --color-accent: var(--mood-accent);
+  --color-on-accent: var(--mood-on-accent);
+  --font-display: var(--mood-font-display);
+  --font-body: var(--mood-font-body);
+  --font-label: var(--mood-font-label);
+  --font-numbers: var(--mood-font-numbers);
+  --radius-tile: var(--mood-radius);
+}
