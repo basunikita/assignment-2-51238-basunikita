@@ -1,7 +1,7 @@
 # A Week of Workouts: Mood Boards: Design Spec
 
 Date: 2026-10-07
-Status: Draft, awaiting review.
+Status: Approved (written spec reviewed 2026-10-07).
 
 ## 1. Goal
 
