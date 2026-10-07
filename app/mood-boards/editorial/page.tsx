@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Placeholder from "../../placeholder";
+import { getMood } from "@/app/moods";
+import MoodBoard from "../_components/MoodBoard";
+import { EDITORIAL_ARTIFACTS } from "./artifacts";
 
 export const metadata: Metadata = { title: "Editorial mood board" };
 
 export default function EditorialMoodBoard() {
-  return <Placeholder title="Editorial mood board" />;
+  return <MoodBoard mood={getMood("editorial")} artifacts={EDITORIAL_ARTIFACTS} />;
 }
