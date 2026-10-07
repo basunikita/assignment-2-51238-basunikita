@@ -45,3 +45,6 @@ next-env.d.ts
 
 # course brief (not ours to publish)
 /*.pdf
+
+# brainstorming mockups
+.superpowers/
