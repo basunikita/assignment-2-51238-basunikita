@@ -175,7 +175,6 @@ export const PLATE_ROOM_ARTIFACTS: Artifact[] = [
       </Specimen>
     ),
   },
-  PHOTOS.treadmills,
   {
     kind: "texture",
     id: "texture-floor-line",
