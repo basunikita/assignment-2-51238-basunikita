@@ -1,0 +1,14 @@
+import type { Photo } from "../_components/artifact";
+
+// Printed by `scripts/unsplash.sh get plate-room <id> <name>`; alt text rewritten by hand.
+export const PHOTOS = {
+  bumperPlates: { kind: "photo", src: "/mood-boards/plate-room/bumper-plates.jpg", width: 1000, height: 667, alt: "Yellow, blue and green bumper plates stacked on a black floor", photographer: "Victor Freitas", photoUrl: "https://unsplash.com/photos/three-pairs-of-assorted-color-rogue-bumper-plates-JbI04nYfaJk" },
+  barbellFloor: { kind: "photo", src: "/mood-boards/plate-room/barbell-floor.jpg", width: 1000, height: 1500, alt: "A loaded barbell on rubber flooring beside a yellow and black hazard line", photographer: "Putri Ardhia", photoUrl: "https://unsplash.com/photos/weightlifting-equipment-is-ready-for-use-in-a-gym-IZEYnQPwzSI" },
+  cableMachine: { kind: "photo", src: "/mood-boards/plate-room/cable-machine.jpg", width: 1000, height: 1500, alt: "A red cable machine with weight stacks in a bright gym", photographer: "Stefan Vibes", photoUrl: "https://unsplash.com/photos/red-cable-gym-machines-in-workout-K0KuhGcu8Ag" },
+  barbellRack: { kind: "photo", src: "/mood-boards/plate-room/barbell-rack.jpg", width: 1000, height: 750, alt: "Red squat racks holding red, blue, green and yellow plates", photographer: "George Pagan III", photoUrl: "https://unsplash.com/photos/three-red-barbell-machines-5Kfpn0m0OB4" },
+  dumbbellRack: { kind: "photo", src: "/mood-boards/plate-room/dumbbell-rack.jpg", width: 1000, height: 667, alt: "A rack of dumbbells with orange weight numbers against a block wall", photographer: "Ambitious Studio* | Rick Barrett", photoUrl: "https://unsplash.com/photos/black-and-red-kettle-bell-lot-uwk8IS-HfJ8" },
+  gymSign: { kind: "photo", src: "/mood-boards/plate-room/gym-sign.jpg", width: 1000, height: 563, alt: "A red arrow and the word GYM painted on concrete", photographer: "George Pagan III", photoUrl: "https://unsplash.com/photos/gym-road-signage-9GdMuamOGlc" },
+  plate45: { kind: "photo", src: "/mood-boards/plate-room/plate-45.jpg", width: 1000, height: 667, alt: "Close-up of a black weight plate stamped 45 LBS", photographer: "Russell Moore", photoUrl: "https://unsplash.com/photos/close-up-of-a-45-lbs-weight-plate-Dfk3z6fDN84" },
+  rubberFloor: { kind: "photo", src: "/mood-boards/plate-room/rubber-floor.jpg", width: 1000, height: 667, alt: "A red sprint lane with white marks across a black gym floor", photographer: "Ambitious Studio* | Rick Barrett", photoUrl: "https://unsplash.com/photos/an-overhead-view-of-a-gym-with-a-red-carpet-vc09nUKk5xI" },
+  treadmills: { kind: "photo", src: "/mood-boards/plate-room/treadmills.jpg", width: 1000, height: 1333, alt: "A row of treadmills in a bright white gym", photographer: "Dimas Aji Kresnanto", photoUrl: "https://unsplash.com/photos/a-row-of-treadmills-in-a-gym-dp0M68k4ZAA" },
+} satisfies Record<string, Photo>;
