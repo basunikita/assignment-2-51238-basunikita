@@ -27,7 +27,7 @@ const CONTENTS = [
 ];
 
 export const EDITORIAL_ARTIFACTS: Artifact[] = [
-  bw(PHOTOS.runner),
+  bw(PHOTOS.kettlebells),
   {
     kind: "interface",
     id: "ui-masthead",
@@ -138,8 +138,7 @@ export const EDITORIAL_ARTIFACTS: Artifact[] = [
     node: (
       <Specimen caption="Newsreader 400 · Body" className={SPECIMEN}>
         <p className="text-[17px] leading-relaxed">
-          <span className="float-left mr-2 font-display text-6xl font-semibold leading-[0.8] text-accent">G</span>
-          o at a pace where you could still hold a conversation. Walking breaks are part of the plan, not a
+          Go at a pace where you could still hold a conversation. Walking breaks are part of the plan, not a
           failure of it.
         </p>
       </Specimen>

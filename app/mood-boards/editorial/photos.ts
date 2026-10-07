@@ -2,7 +2,7 @@ import type { Photo } from "../_components/artifact";
 
 // Printed by `scripts/unsplash.sh get editorial <id> <name>`; alt text rewritten by hand.
 export const PHOTOS = {
-  runner: { kind: "photo", src: "/mood-boards/editorial/runner.jpg", width: 1000, height: 1498, alt: "A runner seen from behind crossing a rain-wet bridge under steel arches", photographer: "Oscar  Söderlund", photoUrl: "https://unsplash.com/photos/greyscale-photography-of-woman-running-on-bridge-dmA0n0cemjE" },
+  kettlebells: { kind: "photo", src: "/mood-boards/editorial/kettlebells.jpg", width: 1000, height: 667, alt: "A row of kettlebells on a gym floor, the front one marked 20 lb", photographer: "Heidi Erickson", photoUrl: "https://unsplash.com/photos/a-row-of-kettles-lined-up-in-a-gym-CPSjcuuV8E8" },
   trackLanes: { kind: "photo", src: "/mood-boards/editorial/track-lanes.jpg", width: 1000, height: 1500, alt: "Lane seven painted in white on a running track", photographer: "Alejandro Barba", photoUrl: "https://unsplash.com/photos/running-track-with-number-seven-X9fNpnH-qTI" },
   raceBib: { kind: "photo", src: "/mood-boards/editorial/race-bib.jpg", width: 1000, height: 1778, alt: "A pack of marathon runners wearing race bibs, one waving", photographer: "Quan-You Zhang", photoUrl: "https://unsplash.com/photos/woman-waves-while-running-in-a-marathon-race-d6Sbmz4O0E4" },
   stopwatch: { kind: "photo", src: "/mood-boards/editorial/stopwatch.jpg", width: 1000, height: 750, alt: "An analog stopwatch on a black background", photographer: "William Warby", photoUrl: "https://unsplash.com/photos/a-close-up-of-a-stopwatch-on-a-black-background-VwqMTcsb0Tg" },
