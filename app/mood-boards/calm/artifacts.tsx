@@ -52,7 +52,6 @@ export const CALM_ARTIFACTS: Artifact[] = [
       />
     ),
   },
-  PHOTOS.treadmillWindow,
   { kind: "color", id: "color-sky", node: <Swatch swatch={getSwatch(calm, "sky")} textToken="ink" className="h-28" /> },
   {
     kind: "interface",
