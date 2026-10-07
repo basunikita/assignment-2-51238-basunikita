@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "A Week of Workouts",
+  title: { default: "A Week of Workouts", template: "%s · A Week of Workouts" },
   description: "Three mood boards, three design systems, and a site for a week of workouts.",
 };
 

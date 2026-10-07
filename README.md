@@ -10,16 +10,17 @@ It is a static [Next.js](https://nextjs.org) 16 site (`output: "export"` in `nex
 
 | Route | Source | What it is |
 |---|---|---|
-| `/` | `app/page.tsx` | Home page, built from the list in `app/sections.ts` |
-| `/moods/1/` … `/moods/3/` | `app/moods/<n>/page.tsx` | Mood boards |
-| `/systems/1/` … `/systems/3/` | `app/systems/<n>/page.tsx` | Design system *n*, built from mood board *n* |
-| `/site/` | `app/site/page.tsx` | The final site |
+| `/` | `app/page.tsx` | The hub. Each mood's palette, roles, fonts and contrast pairs live in `app/moods.ts`; fonts load in `app/fonts.ts` |
+| `/mood-boards/<mood>/` | `app/mood-boards/<mood>/` | Mood boards: `calm`, `editorial`, `plate-room`. Shared layout in `app/mood-boards/_components/` |
+| `/design-systems/<mood>/` | `app/design-systems/<mood>/page.tsx` | Design system *mood*, built from its mood board (placeholder for now) |
+| `/workout-week/` | `app/workout-week/page.tsx` | The final site (placeholder for now) |
 
 ## Commands
 
 ```bash
 npm run dev     # http://localhost:3000
 npm run lint
+npm test        # clean static build, then the checks in tests/
 npm run build   # static export to out/
 ```
 
