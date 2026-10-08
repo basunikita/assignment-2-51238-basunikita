@@ -11,7 +11,7 @@ It is a static [Next.js](https://nextjs.org) 16 site (`output: "export"` in `nex
 | Route | Source | What it is |
 |---|---|---|
 | `/` | `app/page.tsx` | The hub. Each mood's palette, roles, fonts and contrast pairs live in `app/moods.ts`; fonts load in `app/fonts.ts` |
-| `/mood-boards/<mood>/` | `app/mood-boards/<mood>/` | Mood boards: `calm`, `editorial`, `plate-room`. Shared layout in `app/mood-boards/_components/` |
+| `/mood-boards/<mood>/` | `app/mood-boards/<mood>/` | Mood boards: `sunrise`, `editorial`, `plate-room`. Shared layout in `app/mood-boards/_components/` |
 | `/design-systems/<mood>/` | `app/design-systems/<mood>/page.tsx` | Design system *mood*, built from its mood board (placeholder for now) |
 | `/workout-week/` | `app/workout-week/page.tsx` | The final site (placeholder for now) |
 
@@ -31,7 +31,7 @@ refuses Unsplash+ photos and prints the entry for `app/mood-boards/<mood>/photos
 
 ```bash
 scripts/unsplash.sh search "treadmill window"
-scripts/unsplash.sh get calm <photo-id> treadmill-window
+scripts/unsplash.sh get sunrise <photo-id> treadmill-window
 ```
 
 Rewrite each printed `alt` by hand so it describes the photo plainly.

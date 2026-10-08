@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 export const ROOT = fileURLToPath(new URL("../", import.meta.url));
 export const OUT = `${ROOT}out`;
 
-// route starts and ends with "/", e.g. "/mood-boards/calm/".
+// route starts and ends with "/", e.g. "/mood-boards/sunrise/".
 export function readPage(route) {
   const file = `${OUT}${route}index.html`;
   assert.ok(existsSync(file), `${route} was not exported (looked for ${file})`);

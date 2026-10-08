@@ -11,7 +11,7 @@ test("contrast matches known WCAG values", () => {
 test("there are three moods in hub order", () => {
   assert.deepEqual(
     MOODS.map((mood) => mood.slug),
-    ["calm", "editorial", "plate-room"],
+    ["sunrise", "editorial", "plate-room"],
   );
 });
 

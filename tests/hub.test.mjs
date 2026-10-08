@@ -4,10 +4,10 @@ import test from "node:test";
 import { OUT, readPage } from "./helpers.mjs";
 
 const PAGES = [
-  "/mood-boards/calm/",
+  "/mood-boards/sunrise/",
   "/mood-boards/editorial/",
   "/mood-boards/plate-room/",
-  "/design-systems/calm/",
+  "/design-systems/sunrise/",
   "/design-systems/editorial/",
   "/design-systems/plate-room/",
   "/workout-week/",
@@ -22,8 +22,8 @@ test("every page the hub links to is exported", () => {
   for (const page of PAGES) readPage(page);
 });
 
-test("the scaffold routes the hub replaced are gone", () => {
-  for (const page of ["/moods/1/", "/systems/1/", "/site/"]) {
+test("old routes the hub replaced are gone", () => {
+  for (const page of ["/moods/1/", "/systems/1/", "/site/", "/mood-boards/calm/", "/design-systems/calm/"]) {
     assert.ok(!existsSync(`${OUT}${page}index.html`), `${page} still exists`);
   }
 });

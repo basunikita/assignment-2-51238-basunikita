@@ -1,4 +1,4 @@
-export type MoodSlug = "calm" | "editorial" | "plate-room";
+export type MoodSlug = "sunrise" | "editorial" | "plate-room";
 
 export type Swatch = {
   token: string;
@@ -31,9 +31,9 @@ export type Mood = {
 
 export const MOODS: Mood[] = [
   {
-    slug: "calm",
-    name: "Calm",
-    tagline: "Calm · Matte · Dawn",
+    slug: "sunrise",
+    name: "Sunrise",
+    tagline: "Sunrise · Matte · Calm",
     swatches: [
       { token: "peach", name: "Peach", hex: "#F6D3BF", role: "Warm tint" },
       { token: "apricot", name: "Apricot", hex: "#EBA587", role: "Warm accent" },

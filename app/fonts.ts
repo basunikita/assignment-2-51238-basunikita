@@ -30,7 +30,7 @@ const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
 
 // Put a mood's classes on any element whose children use that mood's fonts.
 export const MOOD_FONT_CLASSES: Record<MoodSlug, string> = {
-  calm: nunito.variable,
+  sunrise: nunito.variable,
   editorial: `${newsreader.variable} ${libreFranklin.variable}`,
   "plate-room": `${bigShoulders.variable} ${bigShouldersStencil.variable} ${archivo.variable}`,
 };

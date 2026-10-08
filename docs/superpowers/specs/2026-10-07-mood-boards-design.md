@@ -2,6 +2,9 @@
 
 Date: 2026-10-07
 Status: Approved (written spec reviewed 2026-10-07).
+Update 2026-10-07: at Nikita's request the Calm mood is now named **Sunrise** (tagline
+"Sunrise · Matte · Calm"; routes `/mood-boards/sunrise/` and `/design-systems/sunrise/`).
+Its palette and type are unchanged. The rest of this spec still says "Calm".
 
 ## 1. Goal
 

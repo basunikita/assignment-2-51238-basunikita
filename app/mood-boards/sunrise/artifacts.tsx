@@ -4,7 +4,7 @@ import Specimen from "../_components/Specimen";
 import Swatch from "../_components/Swatch";
 import { PHOTOS } from "./photos";
 
-const calm = getMood("calm");
+const sunrise = getMood("sunrise");
 const SPECIMEN = "rounded-tile border border-line";
 const CARD = "rounded-tile border border-line p-4";
 const PRIMARY = "inline-block whitespace-nowrap rounded-full bg-accent px-4 py-2.5 text-sm font-bold text-on-accent sm:px-5 sm:text-base";
@@ -18,7 +18,7 @@ const UPPER_BODY = [
   ["Shoulder press", "3 × 10"],
 ];
 
-export const CALM_ARTIFACTS: Artifact[] = [
+export const SUNRISE_ARTIFACTS: Artifact[] = [
   PHOTOS.sunriseRoad,
   {
     kind: "type",
@@ -29,7 +29,7 @@ export const CALM_ARTIFACTS: Artifact[] = [
       </Specimen>
     ),
   },
-  { kind: "color", id: "color-peach", node: <Swatch swatch={getSwatch(calm, "peach")} textToken="ink" className="h-44" /> },
+  { kind: "color", id: "color-peach", node: <Swatch swatch={getSwatch(sunrise, "peach")} textToken="ink" className="h-44" /> },
   PHOTOS.stretching,
   {
     kind: "interface",
@@ -52,7 +52,7 @@ export const CALM_ARTIFACTS: Artifact[] = [
       />
     ),
   },
-  { kind: "color", id: "color-sky", node: <Swatch swatch={getSwatch(calm, "sky")} textToken="ink" className="h-28" /> },
+  { kind: "color", id: "color-sky", node: <Swatch swatch={getSwatch(sunrise, "sky")} textToken="ink" className="h-28" /> },
   {
     kind: "interface",
     id: "ui-days",
@@ -91,16 +91,16 @@ export const CALM_ARTIFACTS: Artifact[] = [
     id: "texture-grain",
     node: (
       <svg viewBox="0 0 200 160" role="img" aria-label="Paper grain" className="block h-auto w-full bg-bg">
-        <filter id="calm-grain">
+        <filter id="sunrise-grain">
           <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
           <feColorMatrix type="saturate" values="0" />
         </filter>
-        <rect width="200" height="160" filter="url(#calm-grain)" opacity="0.25" />
+        <rect width="200" height="160" filter="url(#sunrise-grain)" opacity="0.25" />
       </svg>
     ),
   },
   PHOTOS.bikeDawn,
-  { kind: "color", id: "color-apricot", node: <Swatch swatch={getSwatch(calm, "apricot")} textToken="ink" className="h-36" /> },
+  { kind: "color", id: "color-apricot", node: <Swatch swatch={getSwatch(sunrise, "apricot")} textToken="ink" className="h-36" /> },
   {
     kind: "interface",
     id: "ui-timer",
@@ -140,7 +140,7 @@ export const CALM_ARTIFACTS: Artifact[] = [
       </Specimen>
     ),
   },
-  { kind: "color", id: "color-dusk", node: <Swatch swatch={getSwatch(calm, "dusk")} textToken="warm-white" className="h-40" /> },
+  { kind: "color", id: "color-dusk", node: <Swatch swatch={getSwatch(sunrise, "dusk")} textToken="warm-white" className="h-40" /> },
   PHOTOS.dawnPath,
   {
     kind: "interface",
@@ -172,7 +172,7 @@ export const CALM_ARTIFACTS: Artifact[] = [
     ),
   },
   PHOTOS.shoesLaced,
-  { kind: "color", id: "color-ink", node: <Swatch swatch={getSwatch(calm, "ink")} textToken="warm-white" className="h-32" /> },
+  { kind: "color", id: "color-ink", node: <Swatch swatch={getSwatch(sunrise, "ink")} textToken="warm-white" className="h-32" /> },
   {
     kind: "interface",
     id: "ui-card",
