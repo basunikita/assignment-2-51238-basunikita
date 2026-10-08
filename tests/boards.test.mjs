@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { describe, test } from "node:test";
 import { getSwatch, MOODS } from "../app/moods.ts";
-import { contrast, countMatches, readPage, ROOT } from "./helpers.mjs";
+import { contrast, countMatches, findNested, readPage, ROOT } from "./helpers.mjs";
 
 const MINIMUM = { photo: 8, color: 4, type: 3, texture: 3, interface: 5 };
 const MAX_PHOTO_BYTES = 400_000;
@@ -75,9 +75,7 @@ for (const mood of MOODS) {
       const muted = getSwatch(mood, mood.roles.muted).hex;
       const surface = getSwatch(mood, mood.roles.surface).hex;
       if (contrast(muted, surface) >= 4.5) return;
-      const classLists = source().match(/className=(?:"[^"]*"|\{`[^`]*`\})/g) ?? [];
-      const offenders = classLists.filter((classes) => classes.includes("bg-surface") && classes.includes("text-muted"));
-      assert.deepEqual(offenders, []);
+      assert.deepEqual(findNested(page(), "bg-surface", "text-muted"), []);
     });
   });
 }
