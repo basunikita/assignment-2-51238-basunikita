@@ -11,7 +11,7 @@ const SWATCH_EDGE = "ring-1 ring-inset ring-zinc-900/15 dark:ring-zinc-100/25";
 function HubSection({ step, title, children }: { step: number; title: string; children: ReactNode }) {
   return (
     <section className="mt-10">
-      <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">
+      <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">
         <span className="grid h-5 w-5 place-items-center rounded-full bg-zinc-900 text-[11px] text-white dark:bg-zinc-100 dark:text-zinc-900">
           {step}
         </span>
@@ -25,7 +25,7 @@ function HubSection({ step, title, children }: { step: number; title: string; ch
 export default function Home() {
   return (
     <main className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-8 sm:py-16">
-      <p className="text-sm text-zinc-500">MPCS 51238 · UI/UX &amp; Visual Design</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">MPCS 51238 · UI/UX &amp; Visual Design</p>
       <h1 className="mt-1 text-4xl font-semibold tracking-tight">A Week of Workouts</h1>
       <p className="mt-3 max-w-prose text-zinc-600 dark:text-zinc-400">
         A beginner&apos;s week of gym strength work and cardio: three moods, a design system built from
@@ -79,7 +79,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-sm text-zinc-500">Each one built from its mood board.</p>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Each one built from its mood board.</p>
       </HubSection>
 
       <HubSection step={3} title="Your site">

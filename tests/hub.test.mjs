@@ -41,3 +41,10 @@ test("every hub link shows a keyboard focus outline", () => {
 test("the hub shows each mood's type sample", () => {
   assert.equal((readPage("/").match(/>Aa</g) ?? []).length, 3);
 });
+
+test("the hub's gray text stays legible in dark mode", () => {
+  // zinc-500 is 4.8:1 on white but only 4.1:1 on the dark-mode background, so it needs a dark: color.
+  const classLists = [...readPage("/").matchAll(/\bclass="([^"]*)"/g)].map(([, classes]) => classes.split(/\s+/));
+  const tooFaint = classLists.filter((classes) => classes.includes("text-zinc-500") && !classes.some((name) => name.startsWith("dark:text-")));
+  assert.deepEqual(tooFaint.map((classes) => classes.join(" ")), []);
+});
