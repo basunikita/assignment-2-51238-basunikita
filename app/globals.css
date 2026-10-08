@@ -34,6 +34,7 @@ body {
   --color-line: var(--mood-line);
   --color-accent: var(--mood-accent);
   --color-on-accent: var(--mood-on-accent);
+  --color-focus: var(--mood-focus);
   --font-display: var(--mood-font-display);
   --font-body: var(--mood-font-body);
   --font-label: var(--mood-font-label);

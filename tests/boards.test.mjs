@@ -57,6 +57,12 @@ for (const mood of MOODS) {
       assert.equal(stated, countMatches(html, /data-artifact="(photo|generated)"/g));
     });
 
+    test("outlines keyboard focus in the focus color, not the accent", () => {
+      const html = page();
+      assert.ok(html.includes("focus-visible:outline-focus"), "no focus-visible:outline-focus class");
+      assert.ok(!html.includes("focus-visible:outline-accent"), "still uses the accent for focus");
+    });
+
     test("has no focusable mock controls", () => {
       assert.deepEqual(page().match(/<button|<input|<select|tabindex=/g) ?? [], []);
     });

@@ -5,7 +5,7 @@ import { MOOD_FONT_CLASSES } from "@/app/fonts";
 import { moodStyle, type Mood } from "@/app/moods";
 import type { Artifact, Photo } from "./artifact";
 
-const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
+const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus";
 
 export default function MoodBoard({ mood, artifacts }: { mood: Mood; artifacts: Artifact[] }) {
   const photos = artifacts.filter((artifact): artifact is Photo => artifact.kind === "photo");

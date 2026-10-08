@@ -7,7 +7,7 @@ export type Swatch = {
   role: string;
 };
 
-type ColorRole = "bg" | "surface" | "ink" | "muted" | "line" | "accent" | "on-accent";
+type ColorRole = "bg" | "surface" | "ink" | "muted" | "line" | "accent" | "on-accent" | "focus";
 type FontRole = "display" | "body" | "label" | "numbers";
 
 export type Mood = {
@@ -51,6 +51,7 @@ export const MOODS: Mood[] = [
       line: "peach",
       accent: "dusk",
       "on-accent": "warm-white",
+      focus: "dusk",
     },
     fonts: {
       display: "var(--font-nunito)",
@@ -92,6 +93,7 @@ export const MOODS: Mood[] = [
       line: "rule",
       accent: "red",
       "on-accent": "paper",
+      focus: "ink",
     },
     fonts: {
       display: "var(--font-newsreader)",
@@ -138,6 +140,7 @@ export const MOODS: Mood[] = [
       line: "steel",
       accent: "safety",
       "on-accent": "ink",
+      focus: "ink",
     },
     fonts: {
       display: "var(--font-big-shoulders)",
