@@ -33,7 +33,7 @@ export default function Home() {
       </p>
 
       <HubSection step={1} title="Mood boards">
-        <ul className="grid gap-3 sm:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {MOODS.map((mood) => (
             <li key={mood.slug}>
               <Link href={`/mood-boards/${mood.slug}/`} className={CARD}>
@@ -56,7 +56,7 @@ export default function Home() {
       </HubSection>
 
       <HubSection step={2} title="Design systems">
-        <ul className="grid gap-3 sm:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {MOODS.map((mood) => (
             <li key={mood.slug}>
               <Link href={`/design-systems/${mood.slug}/`} className={CARD}>
