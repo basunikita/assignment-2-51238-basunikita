@@ -18,7 +18,7 @@ export type Mood = {
   swatches: Swatch[];
   // The brief's color roles, each naming a swatch token.
   roles: Record<ColorRole, string>;
-  // CSS font-family values; the variables come from app/fonts.ts.
+  // CSS font-family values; the variables come from the mood's module in app/fonts/.
   fonts: Record<FontRole, string>;
   radius: string;
   // Weight and case for the board's title.

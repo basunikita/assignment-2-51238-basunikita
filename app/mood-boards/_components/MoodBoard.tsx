@@ -1,19 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
-import { MOOD_FONT_CLASSES } from "@/app/fonts";
 import { moodStyle, type Mood } from "@/app/moods";
 import type { Artifact, Photo } from "./artifact";
 
 const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus";
 
-export default function MoodBoard({ mood, artifacts }: { mood: Mood; artifacts: Artifact[] }) {
+// fontClass comes from the mood's module in app/fonts/, so a board loads only its own fonts.
+export default function MoodBoard({
+  mood,
+  fontClass,
+  artifacts,
+}: {
+  mood: Mood;
+  fontClass: string;
+  artifacts: Artifact[];
+}) {
   const photos = artifacts.filter((artifact): artifact is Photo => artifact.kind === "photo");
   const tile = `mb-3 break-inside-avoid overflow-hidden rounded-tile ${mood.tileClass}`;
 
   return (
     <div
-      className={`${MOOD_FONT_CLASSES[mood.slug]} flex-1 bg-bg font-body text-ink`}
+      className={`${fontClass} flex-1 bg-bg font-body text-ink`}
       style={moodStyle(mood) as CSSProperties}
     >
       <main className="mx-auto max-w-[1440px] px-4 py-8 sm:px-8 sm:py-12">

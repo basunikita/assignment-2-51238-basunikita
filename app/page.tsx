@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { MOOD_FONT_CLASSES } from "./fonts";
+import { HUB_DISPLAY_FONTS } from "./fonts/hub";
 import { MOODS } from "./moods";
 
 const FOCUS =
@@ -60,7 +60,7 @@ export default function Home() {
           {MOODS.map((mood) => (
             <li key={mood.slug}>
               <Link href={`/design-systems/${mood.slug}/`} className={CARD}>
-                <span className={`flex items-center gap-2 ${MOOD_FONT_CLASSES[mood.slug]}`} aria-hidden="true">
+                <span className={`flex items-center gap-2 ${HUB_DISPLAY_FONTS[mood.slug]}`} aria-hidden="true">
                   <span className="text-2xl leading-none" style={{ fontFamily: mood.fonts.display }}>
                     Aa
                   </span>
