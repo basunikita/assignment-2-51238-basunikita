@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
+export { contrast } from "../app/contrast.ts";
+
 export const ROOT = fileURLToPath(new URL("../", import.meta.url));
 export const OUT = `${ROOT}out`;
 
@@ -35,18 +37,4 @@ export function findNested(html, outerClass, innerClass) {
     if (!selfClosing && !VOID_TAGS.has(tagName)) open.push({ name: tagName, classes });
   }
   return found;
-}
-
-function luminance(hex) {
-  const [r, g, b] = [1, 3, 5].map((start) => {
-    const channel = parseInt(hex.slice(start, start + 2), 16) / 255;
-    return channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
-  });
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-}
-
-// WCAG 2 contrast ratio between two #RRGGBB colors.
-export function contrast(a, b) {
-  const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
-  return (light + 0.05) / (dark + 0.05);
 }

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* One class string styles the real state and a frozen sample (data-state) in the design systems. */
+@custom-variant hover-state (&:hover, &[data-state~="hover"]);
+@custom-variant focus-state (&:focus-visible, &[data-state~="focus"]);
+@custom-variant pressed-state (&:active, &[data-state~="pressed"]);
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -33,6 +38,7 @@ body {
   --color-accent: var(--mood-accent);
   --color-on-accent: var(--mood-on-accent);
   --color-focus: var(--mood-focus);
+  --color-control: var(--mood-control);
   --font-display: var(--mood-font-display);
   --font-body: var(--mood-font-body);
   --font-label: var(--mood-font-label);

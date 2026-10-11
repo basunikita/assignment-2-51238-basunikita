@@ -39,6 +39,11 @@ for (const mood of MOODS) {
     assert.ok(ratio >= 3, `focus ${mood.roles.focus} on ${mood.roles.bg} is ${ratio.toFixed(2)}:1`);
   });
 
+  test(`${mood.name}: control outlines reach 3:1 against the page`, () => {
+    const ratio = contrast(getSwatch(mood, mood.roles.control).hex, getSwatch(mood, mood.roles.bg).hex);
+    assert.ok(ratio >= 3, `control ${mood.roles.control} on ${mood.roles.bg} is ${ratio.toFixed(2)}:1`);
+  });
+
   test(`${mood.name}: every declared text pair reaches 4.5:1`, () => {
     for (const [text, background] of mood.textPairs) {
       const ratio = contrast(getSwatch(mood, text).hex, getSwatch(mood, background).hex);
