@@ -70,7 +70,7 @@ export const PLATE_ROOM_RECIPE: Recipe = {
     root: `m-auto w-[min(30rem,calc(100vw-2rem))] border-2 border-ink bg-surface p-6 text-ink ${SHADOW} backdrop:bg-ink/50`,
     preview: "border-2 border-ink bg-bg p-4",
     title: "font-display text-3xl font-black uppercase leading-none",
-    close: "grid size-9 shrink-0 place-items-center border-2 border-ink font-display text-2xl leading-none hover-state:bg-bg",
+    close: "grid size-9 shrink-0 place-items-center border-2 border-ink font-body text-3xl font-bold leading-none hover-state:bg-bg",
     facts: "font-numbers text-2xl font-extrabold",
     cues: "list-decimal space-y-2 pl-5 font-bold",
   },
