@@ -28,7 +28,9 @@ const FONTS_BY_PAGE = {
   "/mood-boards/sunrise/": ["Nunito"],
   "/mood-boards/editorial/": ["Libre Franklin", "Newsreader"],
   "/mood-boards/plate-room/": ["Archivo", "Big Shoulders", "Big Shoulders Stencil"],
-  "/design-systems/sunrise/": [],
+  "/design-systems/sunrise/": ["Nunito"],
+  "/design-systems/editorial/": ["Libre Franklin", "Newsreader"],
+  "/design-systems/plate-room/": ["Archivo", "Big Shoulders", "Big Shoulders Stencil"],
   "/workout-week/": [],
 };
 
