@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, test } from "node:test";
-import { getSwatch, MOODS } from "../app/moods.ts";
+import { getSwatch, moodStyle, MOODS } from "../app/moods.ts";
 import { contrast, findNested, readPage, ROOT } from "./helpers.mjs";
 
 const SECTIONS = ["color", "type", "spacing", "components", "control-states", "ui-states"];
@@ -83,6 +83,14 @@ for (const mood of MOODS) {
         const text = inner.replace(/<[^>]+>/g, "").trim();
         assert.ok(text || /aria-label(?:ledby)?="/.test(attributes), `unnamed button: ${attributes}`);
       }
+    });
+
+    // `@theme inline` doesn't emit --color-* variables, so a recipe may only read the ones moodStyle sets.
+    test("its recipe reads only CSS variables the page sets", () => {
+      const source = readFileSync(`${ROOT}app/design-system/recipes/${mood.slug}.ts`, "utf8");
+      const defined = new Set(Object.keys(moodStyle(mood)));
+      const used = [...source.matchAll(/(?:var\(|-\()(--[a-z0-9-]+)/g)].map(([, name]) => name);
+      assert.deepEqual(used.filter((name) => !defined.has(name)), []);
     });
 
     for (const role of ["muted", "accent"]) {
