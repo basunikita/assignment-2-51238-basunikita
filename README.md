@@ -12,7 +12,7 @@ It is a static [Next.js](https://nextjs.org) 16 site (`output: "export"` in `nex
 |---|---|---|
 | `/` | `app/page.tsx` | The hub. Each mood's palette, roles, fonts and contrast pairs live in `app/moods.ts`; fonts load in `app/fonts.ts` |
 | `/mood-boards/<mood>/` | `app/mood-boards/<mood>/` | Mood boards: `sunrise`, `editorial`, `plate-room`. Shared layout in `app/mood-boards/_components/` |
-| `/design-systems/<mood>/` | `app/design-systems/<mood>/page.tsx` | Design system *mood*, built from its mood board (placeholder for now) |
+| `/design-systems/<mood>/` | `app/design-systems/<mood>/page.tsx` | Design system *mood*: the shared library in `app/design-system/` styled by `app/design-system/recipes/<mood>.ts` |
 | `/workout-week/` | `app/workout-week/page.tsx` | The final site (placeholder for now) |
 
 ## Commands
