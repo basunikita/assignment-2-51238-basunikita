@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Badge from "@/app/design-system/components/Badge";
 import Button from "@/app/design-system/components/Button";
 import ExerciseList from "@/app/design-system/components/ExerciseList";
 import RadioGroup from "@/app/design-system/components/RadioGroup";
 import StatePanel from "@/app/design-system/components/StatePanel";
-import { REPS, REST_OPTIONS, SETS, UI_STATE_COPY, type WorkoutDay } from "@/app/design-system/content";
+import { REPS, REST_OPTIONS, SETS, UI_STATE_COPY, type DayTone, type WorkoutDay } from "@/app/design-system/content";
 import { useRecipe } from "@/app/design-system/RecipeContext";
 import { daySummary } from "../week";
 import CardioPicker from "./CardioPicker";
+
+const BODY_PART: Partial<Record<DayTone, string>> = { upper: "Upper body", legs: "Legs" };
 
 type DayPanelProps = {
   day: WorkoutDay;
@@ -46,7 +49,10 @@ export default function DayPanel({
     <div className="grid gap-6 font-normal">
       <div>
         <p className={recipe.label}>Day {day.day}</p>
-        <h2 className={`mt-2 ${recipe.sectionTitle}`}>{day.name}</h2>
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <h2 className={recipe.sectionTitle}>{day.name}</h2>
+          {BODY_PART[day.tone] && <Badge tone={day.tone}>{BODY_PART[day.tone]}</Badge>}
+        </div>
         {day.kind === "Strength" && <p className={`mt-2 ${recipe.card.meta}`}>{daySummary(day, SETS, REPS)}</p>}
         {day.kind === "Cardio" && !cardioPick && <p className={`mt-2 ${recipe.hint}`}>Pick one</p>}
       </div>

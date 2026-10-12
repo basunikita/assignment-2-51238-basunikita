@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, type CSSProperties } from "react";
 import Tabs from "@/app/design-system/components/Tabs";
-import { REPS, SETS, WEEK, type WorkoutDay } from "@/app/design-system/content";
+import { REPS, SETS, WEEK, type DayTone, type WorkoutDay } from "@/app/design-system/content";
 import { allDone, noSetsDone, toggleSet } from "@/app/design-system/progress";
 import type { Recipe } from "@/app/design-system/recipe";
 import { RecipeProvider } from "@/app/design-system/RecipeContext";
@@ -13,6 +13,12 @@ import DayPanel from "./DayPanel";
 import ExercisePanel from "./ExercisePanel";
 
 const DEFAULT_REST = "90";
+
+// A selected strength day fills with its plate color: blue for upper body, red for legs. Others stay ink.
+const SELECTED_TAB_FILL: Partial<Record<DayTone, string>> = {
+  upper: "aria-selected:bg-(--swatch-blue)!",
+  legs: "aria-selected:bg-(--swatch-red)!",
+};
 
 type OpenExercise = { day: number; exercise: string };
 
@@ -67,6 +73,7 @@ export default function WorkoutWeek({ mood, recipe, fontClass }: WorkoutWeekProp
               tabs={WEEK.map((day) => ({
                 id: `day-${day.day}`,
                 label: <DayTabLabel day={day} finished={finished.includes(day.day)} />,
+                className: SELECTED_TAB_FILL[day.tone],
                 content: (
                   <DayPanel
                     day={day}

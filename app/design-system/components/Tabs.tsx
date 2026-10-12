@@ -4,7 +4,8 @@ import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "rea
 import type { FrozenState } from "../recipe";
 import { useRecipe } from "../RecipeContext";
 
-type Tab = { id: string; label: ReactNode; content: ReactNode };
+// className is added to that one tab, e.g. to give a selected tab its own fill.
+type Tab = { id: string; label: ReactNode; content: ReactNode; className?: string };
 
 type TabsProps = {
   label: string;
@@ -51,7 +52,7 @@ export default function Tabs({ label, tabs, listClassName = "", tabClassName = "
             tabIndex={index === selected ? 0 : -1}
             onClick={() => setSelected(index)}
             onKeyDown={(event) => onKeyDown(event, index)}
-            className={`${recipe.tabs.tab} ${tabClassName} ${recipe.focus}`}
+            className={`${recipe.tabs.tab} ${tabClassName} ${tab.className ?? ""} ${recipe.focus}`}
           >
             {tab.label}
           </button>

@@ -55,6 +55,35 @@ test("each strength day lists its exercises in order, with a rest picker on 90 s
   }
 });
 
+// Plate colors mark the body part: blue for upper body, red for legs.
+const PLATE = {
+  upper: { tag: "Upper body", fill: "bg-(--swatch-blue)", tab: "aria-selected:bg-(--swatch-blue)!" },
+  legs: { tag: "Legs", fill: "bg-(--swatch-red)", tab: "aria-selected:bg-(--swatch-red)!" },
+};
+
+test("tags each strength day with its body part in its plate color", () => {
+  const all = panels();
+  for (const day of WEEK.filter((each) => each.kind === "Strength")) {
+    const { tag, fill } = PLATE[day.tone];
+    const badge = [...all[day.day - 1].matchAll(/<span\b[^>]*class="([^"]*)"[^>]*>([^<]*)<\/span>/g)].find(
+      ([, , inner]) => inner === tag,
+    );
+    assert.ok(badge, `Day ${day.day} has no ${tag} tag`);
+    assert.ok(badge[1].split(/\s+/).includes(fill), `Day ${day.day}'s tag isn't ${fill}`);
+  }
+});
+
+test("fills a selected strength day's tab with its plate color, and other days' with ink", () => {
+  const tabs = [...markup().matchAll(/<button([^>]*role="tab"[^>]*)>/g)].map(([, attributes]) =>
+    attributes.match(/class="([^"]*)"/)[1].split(/\s+/),
+  );
+  WEEK.forEach((day, index) => {
+    const plate = PLATE[day.tone];
+    if (plate) assert.ok(tabs[index].includes(plate.tab), `Day ${day.day} tab isn't ${plate.tab}`);
+    else assert.ok(!tabs[index].some((name) => /swatch-(?:blue|red)/.test(name)), `Day ${day.day} tab has a plate color`);
+  });
+});
+
 test("each cardio day shows the four options with their steps", () => {
   const all = panels();
   for (const day of WEEK.filter((each) => each.kind === "Cardio")) {
