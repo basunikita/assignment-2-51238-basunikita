@@ -29,7 +29,7 @@ function DayTabLabel({ day, finished }: { day: WorkoutDay; finished: boolean }) 
     <>
       <span className="sr-only">{`Day ${day.day}: ${day.name}${finished ? ", finished" : ""}`}</span>
       <span aria-hidden="true" className="grid justify-items-center gap-1">
-        <span className="font-numbers text-2xl leading-none">
+        <span className="whitespace-nowrap font-numbers text-2xl leading-none">
           {day.day}
           {finished && " ✓"}
         </span>
@@ -59,7 +59,7 @@ export default function WorkoutWeek({ mood, recipe, fontClass }: WorkoutWeekProp
       <div className={`${fontClass} flex-1 bg-bg font-body text-ink`} style={moodStyle(mood) as CSSProperties}>
         <main className="mx-auto max-w-[960px] px-4 py-8 sm:px-8 sm:py-12">
           <header>
-            <Link href="/" className={`text-sm underline underline-offset-4 ${recipe.focus}`}>
+            <Link href="/" className={`text-sm underline underline-offset-4 hover-state:decoration-2 ${recipe.focus}`}>
               ← Hub
             </Link>
             <h1 className={`mt-4 ${recipe.pageTitle}`}>My week</h1>

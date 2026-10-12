@@ -27,6 +27,14 @@ test("has the page heading, the week summary and a link back to the hub", () => 
   assert.match(html, /<a[^>]*href="\/"[^>]*>← Hub<\/a>/);
 });
 
+// The brief asks every control to respond to hover, focus and press.
+test("the hub link responds to hover and focus", () => {
+  const link = markup().match(/<a[^>]*href="\/"[^>]*>/)[0];
+  const classes = link.match(/class="([^"]*)"/)[1].split(/\s+/);
+  assert.ok(classes.some((name) => name.startsWith("hover-state:")), `no hover style: ${classes.join(" ")}`);
+  assert.ok(classes.some((name) => name.startsWith("focus-state:")), `no focus style: ${classes.join(" ")}`);
+});
+
 test("has one tab per day, named for its day, with Day 1 selected", () => {
   const html = markup();
   assert.equal((html.match(/role="tablist"/g) ?? []).length, 1);
