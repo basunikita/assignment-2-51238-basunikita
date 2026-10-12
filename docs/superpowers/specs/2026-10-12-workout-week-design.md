@@ -1,7 +1,7 @@
 # A Week of Workouts: The Site: Design Spec
 
 Date: 2026-10-12
-Status: Draft, for Nikita's review.
+Status: Approved (written spec reviewed 2026-10-12).
 
 ## 1. Goal
 
