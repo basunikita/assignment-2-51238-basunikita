@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { progressLabel, progressPercent } from "../app/design-system/progress.ts";
+import { allDone, noSetsDone, progressLabel, progressPercent, toggleSet } from "../app/design-system/progress.ts";
 import { formatSeconds, isRunning, newTimer, resetTimer, tick, toggleRunning } from "../app/design-system/timer.ts";
 
 test("formats seconds as m:ss", () => {
@@ -66,4 +66,19 @@ test("progress percent rounds and handles zero sets", () => {
   assert.equal(progressPercent(2, 3), 67);
   assert.equal(progressPercent(3, 3), 100);
   assert.equal(progressPercent(0, 0), 0);
+});
+
+test("no sets are done at the start", () => {
+  assert.deepEqual(noSetsDone(3), [false, false, false]);
+});
+
+test("toggling a set flips only that set", () => {
+  assert.deepEqual(toggleSet([true, false, false], 1), [true, true, false]);
+  assert.deepEqual(toggleSet([true, true, false], 0), [false, true, false]);
+});
+
+test("an exercise is done only when every set is", () => {
+  assert.equal(allDone([true, true, true]), true);
+  assert.equal(allDone([true, true, false]), false);
+  assert.equal(allDone([]), false);
 });

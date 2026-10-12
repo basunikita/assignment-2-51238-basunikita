@@ -13,7 +13,7 @@ export const SUNRISE_RECIPE: Recipe = {
   panel: "rounded-tile border border-line p-5",
   swatch: "h-20 rounded-tile border border-line",
   button: {
-    base: "inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-5 py-2.5 font-bold transition pressed-state:scale-[0.97] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
+    base: "inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-5 py-2.5 font-bold transition-[color,background-color,border-color,box-shadow,translate,scale,filter] pressed-state:scale-[0.97] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
     primary: "border-accent bg-accent text-on-accent hover-state:brightness-95",
     secondary: "border-accent bg-bg text-accent hover-state:bg-(--swatch-sky) hover-state:text-ink",
   },
@@ -29,8 +29,8 @@ export const SUNRISE_RECIPE: Recipe = {
   choiceLabel: "flex items-center gap-2.5 text-ink",
   toggle: {
     track:
-      "group inline-flex h-6 w-11 shrink-0 items-center rounded-full border-[1.5px] border-control bg-bg transition aria-checked:border-accent aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
-    thumb: "ml-0.5 size-4 rounded-full bg-control transition group-aria-checked:translate-x-5 group-aria-checked:bg-bg",
+      "group inline-flex h-6 w-11 shrink-0 items-center rounded-full border-[1.5px] border-control bg-bg transition-[color,background-color,border-color,box-shadow,translate,scale,filter] aria-checked:border-accent aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
+    thumb: "ml-0.5 size-4 rounded-full bg-control transition-[color,background-color,border-color,box-shadow,translate,scale,filter] group-aria-checked:translate-x-5 group-aria-checked:bg-bg",
   },
   tabs: {
     list: "inline-flex gap-1 rounded-full bg-surface p-1",
@@ -38,7 +38,7 @@ export const SUNRISE_RECIPE: Recipe = {
     panel: "pt-4",
   },
   chipGroup: "flex flex-wrap gap-2",
-  chip: "rounded-full border-[1.5px] border-line bg-bg px-3.5 py-1.5 text-sm font-semibold text-ink transition hover-state:not-aria-pressed:bg-surface pressed-state:scale-[0.97] aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-on-accent disabled:cursor-not-allowed disabled:opacity-40",
+  chip: "rounded-full border-[1.5px] border-line bg-bg px-3.5 py-1.5 text-sm font-semibold text-ink transition-[color,background-color,border-color,box-shadow,translate,scale,filter] hover-state:not-aria-pressed:bg-surface pressed-state:scale-[0.97] aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-on-accent disabled:cursor-not-allowed disabled:opacity-40",
   card: {
     root: "overflow-hidden rounded-tile bg-surface",
     band: "hidden",

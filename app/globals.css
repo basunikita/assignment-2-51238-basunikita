@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../docs";
 
 /* One class string styles the real state and a frozen sample (data-state) in the design systems. */
 @custom-variant hover-state {

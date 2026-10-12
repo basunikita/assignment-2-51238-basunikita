@@ -10,10 +10,10 @@ type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
   state?: FrozenState;
 };
 
-export default function Checkbox({ id, label, state, ...props }: CheckboxProps) {
+export default function Checkbox({ id, label, state, className = "", ...props }: CheckboxProps) {
   const recipe = useRecipe();
   return (
-    <label htmlFor={id} className={recipe.choiceLabel}>
+    <label htmlFor={id} className={`${recipe.choiceLabel} ${className}`}>
       {/* The native box and its tick share one grid cell, so the tick sits on the box. */}
       <span className="grid shrink-0 place-items-center">
         <input

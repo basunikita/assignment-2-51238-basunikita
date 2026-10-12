@@ -13,7 +13,7 @@ export const EDITORIAL_RECIPE: Recipe = {
   panel: "border-t-4 border-ink pt-4",
   swatch: "h-20 border border-ink",
   button: {
-    base: "inline-flex items-center justify-center gap-2 border px-5 py-3 font-label text-xs font-bold uppercase tracking-[0.12em] transition pressed-state:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
+    base: "inline-flex items-center justify-center gap-2 border px-5 py-3 font-label text-xs font-bold uppercase tracking-[0.12em] transition-[color,background-color,border-color,box-shadow,translate,scale,filter] pressed-state:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
     primary: "border-accent bg-accent text-on-accent hover-state:brightness-90",
     secondary: "border-ink bg-bg text-ink hover-state:bg-ink hover-state:text-bg",
   },
@@ -29,8 +29,8 @@ export const EDITORIAL_RECIPE: Recipe = {
   choiceLabel: "flex items-center gap-2.5 text-lg text-ink",
   toggle: {
     track:
-      "group inline-flex h-[22px] w-11 shrink-0 items-center border-[1.5px] border-control bg-bg transition aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
-    thumb: "ml-[3px] size-3.5 bg-control transition group-aria-checked:translate-x-[22px] group-aria-checked:bg-bg",
+      "group inline-flex h-[22px] w-11 shrink-0 items-center border-[1.5px] border-control bg-bg transition-[color,background-color,border-color,box-shadow,translate,scale,filter] aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
+    thumb: "ml-[3px] size-3.5 bg-control transition-[color,background-color,border-color,box-shadow,translate,scale,filter] group-aria-checked:translate-x-[22px] group-aria-checked:bg-bg",
   },
   tabs: {
     list: "flex gap-5 border-b border-line",

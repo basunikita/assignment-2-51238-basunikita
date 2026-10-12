@@ -21,6 +21,14 @@ const APPLIES = {
 };
 const UI_STATES = ["empty", "loading", "error", "success"];
 
+function compiledCss() {
+  const dir = `${OUT}/_next/static/chunks`;
+  return readdirSync(dir)
+    .filter((file) => file.endsWith(".css"))
+    .map((file) => readFileSync(`${dir}/${file}`, "utf8"))
+    .join("\n");
+}
+
 for (const mood of MOODS) {
   describe(`${mood.name} design system`, () => {
     const page = () => readPage(`/design-systems/${mood.slug}/`);
@@ -121,11 +129,7 @@ for (const mood of MOODS) {
 
 // Without the media query a tapped control keeps its hover style on a phone.
 test("hover styles apply only on devices that can hover", () => {
-  const dir = `${OUT}/_next/static/chunks`;
-  const css = readdirSync(dir)
-    .filter((file) => file.endsWith(".css"))
-    .map((file) => readFileSync(`${dir}/${file}`, "utf8"))
-    .join("\n");
+  const css = compiledCss();
   let outsideHoverMedia = "";
   for (let index = 0; index < css.length; ) {
     const media = css.slice(index).match(/^@media\s*\(hover:\s*hover\)\s*\{/);
@@ -139,6 +143,20 @@ test("hover styles apply only on devices that can hover", () => {
   }
   assert.ok(css.includes("[data-state~=hover]"), "no hover-state rules compiled");
   assert.deepEqual(outsideHoverMedia.match(/[^{}]*:hover[^{}]*\{/g) ?? [], []);
+});
+
+// Tailwind's bare `transition` animates outline-color, so a focus ring fades in from the text color.
+test("recipes never use the bare transition utility", () => {
+  const dir = `${ROOT}app/design-system/recipes`;
+  for (const file of readdirSync(dir)) {
+    const source = readFileSync(`${dir}/${file}`, "utf8");
+    assert.deepEqual(source.match(/(?<![\w:-])transition(?![\w-])/g) ?? [], [], file);
+  }
+});
+
+// The specs and plans quote class names no page uses, e.g. the Plate Room shadow's old --color-ink.
+test("the CSS doesn't ship classes that only appear in docs/", () => {
+  assert.equal(compiledCss().includes("var\\(--color-ink\\)"), false);
 });
 
 test("recipes use only palette colors", () => {

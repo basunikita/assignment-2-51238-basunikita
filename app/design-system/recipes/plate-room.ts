@@ -14,7 +14,7 @@ export const PLATE_ROOM_RECIPE: Recipe = {
   panel: "border-2 border-ink bg-surface p-5",
   swatch: "h-20 border-2 border-ink",
   button: {
-    base: `inline-flex items-center justify-center gap-2 border-2 border-ink px-5 py-2 font-display text-xl font-extrabold uppercase ${SHADOW} transition pressed-state:translate-x-0.5 pressed-state:translate-y-0.5 pressed-state:shadow-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40`,
+    base: `inline-flex items-center justify-center gap-2 border-2 border-ink px-5 py-2 font-display text-xl font-extrabold uppercase ${SHADOW} transition-[color,background-color,border-color,box-shadow,translate,scale,filter] pressed-state:translate-x-0.5 pressed-state:translate-y-0.5 pressed-state:shadow-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40`,
     primary: "bg-accent text-on-accent hover-state:brightness-95",
     secondary: "bg-(--swatch-panel) text-ink hover-state:bg-bg",
   },
@@ -30,8 +30,8 @@ export const PLATE_ROOM_RECIPE: Recipe = {
   choiceLabel: "flex items-center gap-2.5 font-bold text-ink",
   toggle: {
     track:
-      "group inline-flex h-[26px] w-12 shrink-0 items-center border-2 border-control bg-(--swatch-panel) transition aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
-    thumb: "ml-[3px] size-4 bg-ink transition group-aria-checked:translate-x-[22px]",
+      "group inline-flex h-[26px] w-12 shrink-0 items-center border-2 border-control bg-(--swatch-panel) transition-[color,background-color,border-color,box-shadow,translate,scale,filter] aria-checked:bg-accent hover-state:brightness-95 disabled:cursor-not-allowed disabled:opacity-40",
+    thumb: "ml-[3px] size-4 bg-ink transition-[color,background-color,border-color,box-shadow,translate,scale,filter] group-aria-checked:translate-x-[22px]",
   },
   tabs: {
     list: "inline-flex border-2 border-ink",
