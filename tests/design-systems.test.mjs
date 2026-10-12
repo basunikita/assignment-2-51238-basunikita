@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { describe, test } from "node:test";
 import { getSwatch, moodStyle, MOODS } from "../app/moods.ts";
-import { contrast, findNested, readPage, ROOT } from "./helpers.mjs";
+import { contrast, findNested, OUT, readPage, ROOT } from "./helpers.mjs";
 
 const SECTIONS = ["color", "type", "spacing", "components", "control-states", "ui-states"];
 const COMPONENTS = [
@@ -43,6 +43,18 @@ for (const mood of MOODS) {
           assert.equal(cell.includes("data-na"), !applies.includes(state), `${control}-${state}`);
         }
       }
+    });
+
+    // Roving tabindex only ever focuses the selected tab, so that's the focus state worth showing.
+    test("freezes the tab's focus state on the selected tab", () => {
+      const cell = page().match(/<li[^>]*data-cell="tab-focus"[^>]*>[\s\S]*?<\/li>/)?.[0] ?? "";
+      assert.match(cell, /role="tab"[^>]*aria-selected="true"/);
+    });
+
+    test("shows the accent's ratio on the background as well as with its text", () => {
+      const accent = page().match(/<li[^>]*data-role="accent"[^>]*>[\s\S]*?<\/li>/)?.[0] ?? "";
+      const ratio = contrast(getSwatch(mood, mood.roles.accent).hex, getSwatch(mood, mood.roles.bg).hex);
+      assert.ok(accent.includes(`${ratio.toFixed(1)}:1 on background`), `accent role doesn't show ${ratio.toFixed(1)}:1 on background`);
     });
 
     test("keeps the frozen samples out of the tab order", () => {
@@ -106,6 +118,28 @@ for (const mood of MOODS) {
     }
   });
 }
+
+// Without the media query a tapped control keeps its hover style on a phone.
+test("hover styles apply only on devices that can hover", () => {
+  const dir = `${OUT}/_next/static/chunks`;
+  const css = readdirSync(dir)
+    .filter((file) => file.endsWith(".css"))
+    .map((file) => readFileSync(`${dir}/${file}`, "utf8"))
+    .join("\n");
+  let outsideHoverMedia = "";
+  for (let index = 0; index < css.length; ) {
+    const media = css.slice(index).match(/^@media\s*\(hover:\s*hover\)\s*\{/);
+    if (!media) {
+      outsideHoverMedia += css[index++];
+      continue;
+    }
+    let depth = 1;
+    index += media[0].length;
+    while (depth > 0) depth += { "{": 1, "}": -1 }[css[index++]] ?? 0;
+  }
+  assert.ok(css.includes("[data-state~=hover]"), "no hover-state rules compiled");
+  assert.deepEqual(outsideHoverMedia.match(/[^{}]*:hover[^{}]*\{/g) ?? [], []);
+});
 
 test("recipes use only palette colors", () => {
   const dir = `${ROOT}app/design-system/recipes`;

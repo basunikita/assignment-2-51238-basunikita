@@ -35,7 +35,7 @@ export const PLATE_ROOM_RECIPE: Recipe = {
   },
   tabs: {
     list: "inline-flex border-2 border-ink",
-    tab: "border-l-2 border-ink bg-(--swatch-panel) px-4 py-1.5 font-display text-lg font-extrabold uppercase text-ink first:border-l-0 hover-state:not-aria-selected:bg-bg aria-selected:bg-ink aria-selected:text-(--swatch-panel)",
+    tab: "border-l-2 border-ink bg-(--swatch-panel) px-4 py-1.5 font-display text-lg font-extrabold uppercase text-ink first:border-l-0 hover-state:not-aria-selected:bg-bg aria-selected:bg-ink aria-selected:text-(--swatch-panel) aria-selected:focus-state:-outline-offset-5 aria-selected:focus-state:outline-(--swatch-panel)",
     panel: "pt-4 font-bold",
   },
   chipGroup: "flex flex-wrap gap-2",

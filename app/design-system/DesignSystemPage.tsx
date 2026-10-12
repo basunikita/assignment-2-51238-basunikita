@@ -56,7 +56,11 @@ function roleRatio(mood: Mood, role: RoleName): string {
   const ratio = (a: RoleName, b: RoleName) => `${contrast(hex(a), hex(b)).toFixed(1)}:1`;
   if (role === "bg") return `${ratio("ink", "bg")} with text`;
   if (role === "surface") return `${ratio("ink", "surface")} with text`;
-  if (role === "accent") return `${ratio("on-accent", "accent")} with its text`;
+  if (role === "accent") {
+    const onBackground = contrast(hex("accent"), hex("bg"));
+    const textUse = onBackground >= 4.5 ? "" : " (fills only, not text)";
+    return `${ratio("on-accent", "accent")} with its text · ${onBackground.toFixed(1)}:1 on background${textUse}`;
+  }
   if (role === "line") return `${ratio("line", "bg")} · decorative`;
   return `${ratio(role, "bg")} on background`;
 }
@@ -307,7 +311,8 @@ function Sample({ control, state }: { control: string; state: StateName }) {
   if (control === "toggle") {
     return <Toggle label="Sound" checked={selected} onChange={() => undefined} state={frozenState} disabled={disabled} />;
   }
-  return <TabSample label="Today" selected={selected} state={frozenState} />;
+  // Roving tabindex only focuses the selected tab, so the focus sample is selected too.
+  return <TabSample label="Today" selected={selected || state === "focus"} state={frozenState} />;
 }
 
 function ControlStates() {
