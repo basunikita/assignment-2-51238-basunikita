@@ -34,7 +34,7 @@ rest.
 | First view | One day at a time, with a 7-day strip to switch days |
 | Opening day | Always Day 1 (no weekday mapping, no "Today" marker) |
 | Cardio days | All four options as cards, steps visible, nothing to tap |
-| Form cues | Claude drafts cues for the standard Day 1 and Day 3 exercises; Nikita fixes them at review |
+| Form cues | Nikita wrote cues for the five less common exercises; Claude drafted the standard Day 1 and Day 3 ones for Nikita to fix at review |
 | Primary action | Finish workout, on strength and cardio days |
 | Rest length | A picker per day (60 s / 90 s / 2 min), default 90 s |
 | Row progress | Rows show only DONE once all three sets are ticked |
@@ -90,7 +90,7 @@ dialog: focus moves into it, Esc or the × button closes it, and focus returns t
 Inside, top to bottom:
 1. The exercise name as its title.
 2. "3 × 10 · Rest 90 s" (the day's chosen rest).
-3. The form cues as a numbered list, when the exercise has them (see §4).
+3. The form cues as a numbered list (see §4).
 4. The set tracker: three checkboxes "Set 1 · 10 reps" to "Set 3 · 10 reps", a progress bar and
    "N of 3 done". All three start unticked.
 5. The rest timer at the day's rest length. Start/Pause and Reset are **secondary** (outlined)
@@ -120,10 +120,17 @@ The routine is the one in `app/design-system/content.ts` (spec 2026-10-07 §2), 
 
 - **Tab labels,** a new `short` field on each day: BACK/BIS, CARDIO, SHOULDERS/TRIS, CARDIO,
   LEGS, CARDIO, REST.
-- **Form cues for Days 1 and 3,** drafted for Nikita to correct. Day 5's cues are unchanged.
+- **Form cues for Days 1 and 3.** Nikita wrote the cues for the five less common exercises;
+  Claude drafted the rest for Nikita to correct at review. Day 5's cues are unchanged. Every
+  exercise in the week now has cues.
 
 | Exercise | Cues |
 |---|---|
+| African bicep curls (Nikita) | Curl the weight up with a standard underhand grip, palms up. · As you lower it, rotate your wrists into a neutral hammer grip, palms in. · Or alternate hammer and standard curl paths, to work both the bicep and the forearm. |
+| Shoulder superset: O movements and serving platters (Nikita) | O movements: arms straight, move your hands from your thighs up above your head. · Serving platters: arms straight in front of you, bring them back in toward your chest, then extend them straight out to your sides. |
+| Archer pull (Nikita) | Set the cable at shoulder height. · Pull the attachment back like drawing a bow and arrow. · Repeat on the other side. |
+| Tricep cross extension (Nikita) | Set the cable at shoulder height. · Pull the attachment diagonally across your body. · Focus on your triceps as you pull. |
+| Tricep press (Nikita) | Use the tricep press machine. |
 | Lat pulldowns | Grip the bar a little wider than your shoulders, thighs under the pad. · Pull the bar to your upper chest, leading with your elbows. · Let it rise slowly until your arms are straight. |
 | Face pulls | Set the rope at face height and step back until your arms are straight. · Pull the rope toward your face, hands ending beside your ears. · Squeeze your shoulder blades, then return slowly. |
 | Single-arm dumbbell rows | One hand and knee on the bench, back flat. · Pull the dumbbell toward your hip, elbow close to your side. · Lower it until your arm is straight, without twisting. |
@@ -133,10 +140,6 @@ The routine is the one in `app/design-system/content.ts` (spec 2026-10-07 §2), 
 | Cable lateral raise | Stand side-on to a low cable, handle in your far hand. · Raise your arm out to the side to shoulder height, elbow soft. · Lower slowly, without shrugging. |
 | Front raise cable | Stand facing away from a low cable, handle in front of your thighs. · Raise your straight arm in front of you to shoulder height. · Lower slowly, keeping your body still. |
 | Overhead tricep extension cable | Face away from the cable, rope behind your head, elbows by your ears. · Straighten your arms overhead without moving your elbows. · Bend back slowly until you feel the stretch. |
-
-No cues (their panels show sets, reps, rest, the set tracker and the timer only), unless Nikita
-supplies them: African bicep curls · Shoulder superset: O movements and serving platters · Archer
-pull · Tricep cross extension · Tricep press.
 
 ## 5. Architecture
 
