@@ -66,14 +66,14 @@ Top to bottom, in one centered column (max width about 960 px):
        90 s / 2 min, default 90 s. Each day keeps its own choice.
      - The exercise list: the library's ExerciseList (outlined box, one row per exercise, "3 × 10
        ›"). A row shows a black DONE badge once all three of its sets are ticked.
-     - Finish workout (see 3.4).
+     - Finish workout (item 4 below).
    - **Cardio days (2, 4, 6):**
      - Eyebrow "DAY 2", heading "CARDIO", and the line "Pick one".
      - Four outlined cards in a 2 × 2 grid (one column below `sm`): the option's label as the
        card title and its steps as the text, e.g. "RUN 30 MIN / Walk 5 min, run 30 min, walk
        5 min". The cards use Plate Room's card style without the yellow hazard band. Nothing on
        them is interactive.
-     - Finish workout (see 3.4).
+     - Finish workout (item 4 below).
    - **Rest day (7):** eyebrow "DAY 7", heading "REST", and the library's empty StatePanel:
      "Rest day: no workout today". No Finish workout.
 4. **Finish workout:** the page's one primary (yellow) button, at the end of each strength and
