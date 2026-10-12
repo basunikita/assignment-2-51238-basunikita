@@ -21,6 +21,7 @@ import TextLink from "./components/TextLink";
 import Toggle from "./components/Toggle";
 import WorkoutCard from "./components/WorkoutCard";
 import { CARDIO_OPTIONS, DAY_FILTERS, REST_OPTIONS, UI_STATE_COPY, WEEK, type DayFilter } from "./content";
+import { toggleSet } from "./progress";
 import type { FrozenState, Recipe } from "./recipe";
 import { RecipeProvider, useRecipe } from "./RecipeContext";
 
@@ -194,6 +195,8 @@ function Components() {
   const [restSeconds, setRestSeconds] = useState("90");
   const [cardio, setCardio] = useState(CARDIO_OPTIONS[2].value);
   const [openExercise, setOpenExercise] = useState<string | null>(null);
+  // The sample starts with all but the last set done, so the progress bar has something to show.
+  const [faceSets, setFaceSets] = useState([true, true, false]);
 
   const legDay = WEEK[4];
   const restLabel = REST_OPTIONS.find((option) => option.value === restSeconds)?.label ?? "90 s";
@@ -286,7 +289,7 @@ function Components() {
           <RestTimer key={restSeconds} seconds={Number(restSeconds)} />
         </ComponentPanel>
         <ComponentPanel id="set-tracker" title="Set tracker">
-          <SetTracker exercise="Face pulls" sets={3} />
+          <SetTracker exercise="Face pulls" done={faceSets} onToggle={(index) => setFaceSets((current) => toggleSet(current, index))} />
         </ComponentPanel>
       </div>
       <DetailPanel exercise={openExercise} restLabel={restLabel} onClose={() => setOpenExercise(null)} />

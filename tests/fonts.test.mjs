@@ -31,7 +31,7 @@ const FONTS_BY_PAGE = {
   "/design-systems/sunrise/": ["Nunito"],
   "/design-systems/editorial/": ["Libre Franklin", "Newsreader"],
   "/design-systems/plate-room/": ["Archivo", "Big Shoulders", "Big Shoulders Stencil"],
-  "/workout-week/": [],
+  "/workout-week/": ["Archivo", "Big Shoulders", "Big Shoulders Stencil"],
 };
 
 for (const [route, expected] of Object.entries(FONTS_BY_PAGE)) {

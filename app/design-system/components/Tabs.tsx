@@ -4,9 +4,17 @@ import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "rea
 import type { FrozenState } from "../recipe";
 import { useRecipe } from "../RecipeContext";
 
-type Tab = { id: string; label: string; content: ReactNode };
+type Tab = { id: string; label: ReactNode; content: ReactNode };
 
-export default function Tabs({ label, tabs }: { label: string; tabs: Tab[] }) {
+type TabsProps = {
+  label: string;
+  tabs: Tab[];
+  // Added to the recipe's list and tab classes, e.g. to stretch the tabs across a strip.
+  listClassName?: string;
+  tabClassName?: string;
+};
+
+export default function Tabs({ label, tabs, listClassName = "", tabClassName = "" }: TabsProps) {
   const recipe = useRecipe();
   const baseId = useId();
   const [selected, setSelected] = useState(0);
@@ -28,7 +36,7 @@ export default function Tabs({ label, tabs }: { label: string; tabs: Tab[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label={label} className={recipe.tabs.list}>
+      <div role="tablist" aria-label={label} className={`${recipe.tabs.list} ${listClassName}`}>
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
@@ -43,7 +51,7 @@ export default function Tabs({ label, tabs }: { label: string; tabs: Tab[] }) {
             tabIndex={index === selected ? 0 : -1}
             onClick={() => setSelected(index)}
             onKeyDown={(event) => onKeyDown(event, index)}
-            className={`${recipe.tabs.tab} ${recipe.focus}`}
+            className={`${recipe.tabs.tab} ${tabClassName} ${recipe.focus}`}
           >
             {tab.label}
           </button>

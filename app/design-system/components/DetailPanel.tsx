@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 import { FORM_CUES, REPS, SETS } from "../content";
 import { useRecipe } from "../RecipeContext";
 
@@ -23,10 +23,10 @@ export function ExerciseFacts({ exercise, restLabel }: { exercise: string; restL
   );
 }
 
-type DetailPanelProps = { exercise: string | null; restLabel: string; onClose: () => void };
+type DetailPanelProps = { exercise: string | null; restLabel: string; onClose: () => void; children?: ReactNode };
 
 // A native modal dialog: it traps focus, closes on Esc and returns focus to the opener.
-export default function DetailPanel({ exercise, restLabel, onClose }: DetailPanelProps) {
+export default function DetailPanel({ exercise, restLabel, onClose, children }: DetailPanelProps) {
   const recipe = useRecipe();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -38,8 +38,13 @@ export default function DetailPanel({ exercise, restLabel, onClose }: DetailPane
     if (!exercise && dialog.open) dialog.close();
   }, [exercise]);
 
+  // A background tab can deliver a close event after the panel has reopened for another exercise.
+  const ignoreLateClose = () => {
+    if (!dialogRef.current?.open) onClose();
+  };
+
   return (
-    <dialog ref={dialogRef} aria-labelledby={titleId} onClose={onClose} className={recipe.dialog.root}>
+    <dialog ref={dialogRef} aria-labelledby={titleId} onClose={ignoreLateClose} className={recipe.dialog.root}>
       {exercise && (
         <>
           <div className="flex items-start justify-between gap-4">
@@ -51,6 +56,7 @@ export default function DetailPanel({ exercise, restLabel, onClose }: DetailPane
             </button>
           </div>
           <ExerciseFacts exercise={exercise} restLabel={restLabel} />
+          {children}
         </>
       )}
     </dialog>

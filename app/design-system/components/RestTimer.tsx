@@ -8,8 +8,14 @@ import Button from "./Button";
 // Checks the clock several times a second; tick() only changes state when the shown second does.
 const CLOCK_CHECK_MS = 250;
 
+type RestTimerProps = {
+  seconds: number;
+  // The site keeps its one primary button for Finish workout, so its timer uses secondary.
+  buttonVariant?: "primary" | "secondary";
+};
+
 // Remount (change the key) to use a new length; nothing persists across reloads.
-export default function RestTimer({ seconds }: { seconds: number }) {
+export default function RestTimer({ seconds, buttonVariant = "primary" }: RestTimerProps) {
   const recipe = useRecipe();
   const [timer, setTimer] = useState(() => newTimer(seconds));
   const running = isRunning(timer);
@@ -31,7 +37,7 @@ export default function RestTimer({ seconds }: { seconds: number }) {
       <p className={recipe.timer.label}>Rest</p>
       <p className={recipe.timer.digits}>{formatSeconds(timer.remaining)}</p>
       <div className="flex flex-wrap justify-center gap-2">
-        <Button onClick={startOrPause}>{running ? "Pause" : finished ? "Start again" : "Start"}</Button>
+        <Button variant={buttonVariant} onClick={startOrPause}>{running ? "Pause" : finished ? "Start again" : "Start"}</Button>
         <Button variant="secondary" onClick={() => setTimer(resetTimer)}>
           Reset
         </Button>

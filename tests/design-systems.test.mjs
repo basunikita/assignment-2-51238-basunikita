@@ -73,6 +73,10 @@ for (const mood of MOODS) {
       assert.deepEqual([...page().matchAll(/data-ui-state="([^"]+)"/g)].map(([, kind]) => kind), UI_STATES);
     });
 
+    test("starts the set tracker sample with two of three sets done", () => {
+      assert.match(page(), /role="progressbar"[^>]*aria-valuenow="2"/);
+    });
+
     test("marks up switches, tabs and the panel for assistive tech", () => {
       const html = page();
       const switches = html.match(/<button[^>]*role="switch"[^>]*>/g) ?? [];
