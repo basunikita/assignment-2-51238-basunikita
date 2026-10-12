@@ -1,20 +1,28 @@
-export type TimerState = { total: number; remaining: number; running: boolean };
+// While running, endsAt is the clock time (ms) the rest ends; remaining is derived from it.
+export type TimerState = { total: number; remaining: number; endsAt: number | null };
 
 export function newTimer(total: number): TimerState {
-  return { total, remaining: total, running: false };
+  return { total, remaining: total, endsAt: null };
 }
 
-// One second passes. A running timer stops itself when it reaches zero.
-export function tick(state: TimerState): TimerState {
-  if (!state.running) return state;
-  const remaining = Math.max(0, state.remaining - 1);
-  return { ...state, remaining, running: remaining > 0 };
+export function isRunning(state: TimerState): boolean {
+  return state.endsAt !== null;
 }
 
-// Start or pause. Starting a finished timer runs it again from the top.
-export function toggleRunning(state: TimerState): TimerState {
-  if (state.remaining === 0) return { ...state, remaining: state.total, running: true };
-  return { ...state, running: !state.running };
+// Reads the clock rather than counting calls, so a throttled or suspended tab catches up.
+// A running timer stops itself when it reaches zero.
+export function tick(state: TimerState, now: number): TimerState {
+  if (state.endsAt === null) return state;
+  const remaining = Math.max(0, Math.ceil((state.endsAt - now) / 1000));
+  if (remaining === state.remaining && remaining > 0) return state;
+  return { ...state, remaining, endsAt: remaining > 0 ? state.endsAt : null };
+}
+
+// Start or pause at `now`. Starting a finished timer runs it again from the top.
+export function toggleRunning(state: TimerState, now: number): TimerState {
+  if (state.endsAt !== null) return { ...tick(state, now), endsAt: null };
+  const remaining = state.remaining === 0 ? state.total : state.remaining;
+  return { ...state, remaining, endsAt: now + remaining * 1000 };
 }
 
 export function resetTimer(state: TimerState): TimerState {

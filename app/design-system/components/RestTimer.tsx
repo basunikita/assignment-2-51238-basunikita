@@ -2,19 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { useRecipe } from "../RecipeContext";
-import { formatSeconds, newTimer, resetTimer, tick, toggleRunning } from "../timer";
+import { formatSeconds, isRunning, newTimer, resetTimer, tick, toggleRunning } from "../timer";
 import Button from "./Button";
+
+// Checks the clock several times a second; tick() only changes state when the shown second does.
+const CLOCK_CHECK_MS = 250;
 
 // Remount (change the key) to use a new length; nothing persists across reloads.
 export default function RestTimer({ seconds }: { seconds: number }) {
   const recipe = useRecipe();
   const [timer, setTimer] = useState(() => newTimer(seconds));
+  const running = isRunning(timer);
 
   useEffect(() => {
-    if (!timer.running) return;
-    const interval = setInterval(() => setTimer((current) => tick(current)), 1000);
+    if (!running) return;
+    const interval = setInterval(() => setTimer((current) => tick(current, Date.now())), CLOCK_CHECK_MS);
     return () => clearInterval(interval);
-  }, [timer.running]);
+  }, [running]);
+
+  const startOrPause = () => {
+    const now = Date.now();
+    setTimer((current) => toggleRunning(current, now));
+  };
 
   const finished = timer.remaining === 0;
   return (
@@ -22,7 +31,7 @@ export default function RestTimer({ seconds }: { seconds: number }) {
       <p className={recipe.timer.label}>Rest</p>
       <p className={recipe.timer.digits}>{formatSeconds(timer.remaining)}</p>
       <div className="flex flex-wrap justify-center gap-2">
-        <Button onClick={() => setTimer(toggleRunning)}>{timer.running ? "Pause" : finished ? "Start again" : "Start"}</Button>
+        <Button onClick={startOrPause}>{running ? "Pause" : finished ? "Start again" : "Start"}</Button>
         <Button variant="secondary" onClick={() => setTimer(resetTimer)}>
           Reset
         </Button>

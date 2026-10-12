@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { progressLabel, progressPercent } from "../app/design-system/progress.ts";
-import { formatSeconds, newTimer, resetTimer, tick, toggleRunning } from "../app/design-system/timer.ts";
+import { formatSeconds, isRunning, newTimer, resetTimer, tick, toggleRunning } from "../app/design-system/timer.ts";
 
 test("formats seconds as m:ss", () => {
   assert.equal(formatSeconds(90), "1:30");
@@ -11,36 +11,50 @@ test("formats seconds as m:ss", () => {
 });
 
 test("a new timer is full and paused", () => {
-  assert.deepEqual(newTimer(90), { total: 90, remaining: 90, running: false });
+  assert.deepEqual(newTimer(90), { total: 90, remaining: 90, endsAt: null });
+  assert.equal(isRunning(newTimer(90)), false);
 });
 
 test("a paused timer doesn't tick", () => {
-  assert.deepEqual(tick(newTimer(90)), newTimer(90));
+  const paused = newTimer(90);
+  assert.equal(tick(paused, 5000), paused);
 });
 
-test("a running timer counts down one second per tick", () => {
-  const running = toggleRunning(newTimer(90));
-  assert.deepEqual(tick(running), { total: 90, remaining: 89, running: true });
+test("starting sets the end time from the clock", () => {
+  const running = toggleRunning(newTimer(90), 1000);
+  assert.deepEqual(running, { total: 90, remaining: 90, endsAt: 91000 });
+  assert.equal(isRunning(running), true);
+});
+
+test("a running timer counts down by the clock, so a throttled or locked tab catches up", () => {
+  const running = toggleRunning(newTimer(90), 0);
+  assert.equal(tick(running, 1000).remaining, 89);
+  assert.equal(tick(running, 30000).remaining, 60);
+});
+
+test("a part second doesn't change the display or the state", () => {
+  const running = toggleRunning(newTimer(90), 0);
+  assert.equal(tick(running, 500), running);
 });
 
 test("the timer stops at zero", () => {
-  const last = { total: 90, remaining: 1, running: true };
-  assert.deepEqual(tick(last), { total: 90, remaining: 0, running: false });
-  assert.deepEqual(tick(tick(last)), { total: 90, remaining: 0, running: false });
+  const running = toggleRunning(newTimer(90), 0);
+  assert.deepEqual(tick(running, 90000), { total: 90, remaining: 0, endsAt: null });
+  assert.deepEqual(tick(running, 200000), { total: 90, remaining: 0, endsAt: null });
 });
 
 test("toggling pauses and resumes without losing time", () => {
-  const paused = toggleRunning({ total: 90, remaining: 42, running: true });
-  assert.deepEqual(paused, { total: 90, remaining: 42, running: false });
-  assert.deepEqual(toggleRunning(paused), { total: 90, remaining: 42, running: true });
+  const paused = toggleRunning(toggleRunning(newTimer(90), 0), 48000);
+  assert.deepEqual(paused, { total: 90, remaining: 42, endsAt: null });
+  assert.deepEqual(toggleRunning(paused, 100000), { total: 90, remaining: 42, endsAt: 142000 });
 });
 
 test("starting a finished timer runs it again from the top", () => {
-  assert.deepEqual(toggleRunning({ total: 90, remaining: 0, running: false }), { total: 90, remaining: 90, running: true });
+  assert.deepEqual(toggleRunning({ total: 90, remaining: 0, endsAt: null }, 5000), { total: 90, remaining: 90, endsAt: 95000 });
 });
 
 test("reset returns to full and paused", () => {
-  assert.deepEqual(resetTimer({ total: 60, remaining: 12, running: true }), newTimer(60));
+  assert.deepEqual(resetTimer({ total: 60, remaining: 12, endsAt: 99000 }), newTimer(60));
 });
 
 test("progress reads as done of total", () => {
