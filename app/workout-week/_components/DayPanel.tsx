@@ -5,10 +5,10 @@ import Button from "@/app/design-system/components/Button";
 import ExerciseList from "@/app/design-system/components/ExerciseList";
 import RadioGroup from "@/app/design-system/components/RadioGroup";
 import StatePanel from "@/app/design-system/components/StatePanel";
-import { CARDIO_OPTIONS, REPS, REST_OPTIONS, SETS, UI_STATE_COPY, type WorkoutDay } from "@/app/design-system/content";
+import { REPS, REST_OPTIONS, SETS, UI_STATE_COPY, type WorkoutDay } from "@/app/design-system/content";
 import { useRecipe } from "@/app/design-system/RecipeContext";
 import { daySummary } from "../week";
-import CardioCard from "./CardioCard";
+import CardioPicker from "./CardioPicker";
 
 type DayPanelProps = {
   day: WorkoutDay;
@@ -16,11 +16,23 @@ type DayPanelProps = {
   onRestChange: (value: string) => void;
   isDone: (exercise: string) => boolean;
   onOpen: (exercise: string) => void;
+  cardioPick: string | null;
+  onCardioPick: (value: string | null) => void;
   finished: boolean;
   onFinish: () => void;
 };
 
-export default function DayPanel({ day, rest, onRestChange, isDone, onOpen, finished, onFinish }: DayPanelProps) {
+export default function DayPanel({
+  day,
+  rest,
+  onRestChange,
+  isDone,
+  onOpen,
+  cardioPick,
+  onCardioPick,
+  finished,
+  onFinish,
+}: DayPanelProps) {
   const recipe = useRecipe();
   const successRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +48,7 @@ export default function DayPanel({ day, rest, onRestChange, isDone, onOpen, fini
         <p className={recipe.label}>Day {day.day}</p>
         <h2 className={`mt-2 ${recipe.sectionTitle}`}>{day.name}</h2>
         {day.kind === "Strength" && <p className={`mt-2 ${recipe.card.meta}`}>{daySummary(day, SETS, REPS)}</p>}
-        {day.kind === "Cardio" && <p className={`mt-2 ${recipe.hint}`}>Pick one</p>}
+        {day.kind === "Cardio" && !cardioPick && <p className={`mt-2 ${recipe.hint}`}>Pick one</p>}
       </div>
       {day.kind === "Strength" && (
         <>
@@ -50,15 +62,7 @@ export default function DayPanel({ day, rest, onRestChange, isDone, onOpen, fini
           <ExerciseList exercises={day.exercises} onOpen={onOpen} isDone={isDone} />
         </>
       )}
-      {day.kind === "Cardio" && (
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {CARDIO_OPTIONS.map((option) => (
-            <li key={option.value}>
-              <CardioCard label={option.label} detail={option.detail} />
-            </li>
-          ))}
-        </ul>
-      )}
+      {day.kind === "Cardio" && <CardioPicker pick={cardioPick} onPick={onCardioPick} />}
       {day.kind === "Rest" && <StatePanel kind="empty">{UI_STATE_COPY.empty}</StatePanel>}
       {day.kind !== "Rest" &&
         (finished ? (

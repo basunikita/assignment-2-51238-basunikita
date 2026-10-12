@@ -17,6 +17,7 @@ const DEFAULT_REST = "90";
 type OpenExercise = { day: number; exercise: string };
 
 // The visible tab shows the number (and the label from lg); the sr-only text is its accessible name.
+// The strip's tabs share its width equally (min-w-0), so they use less padding than the recipe's tabs.
 function DayTabLabel({ day, finished }: { day: WorkoutDay; finished: boolean }) {
   return (
     <>
@@ -26,7 +27,7 @@ function DayTabLabel({ day, finished }: { day: WorkoutDay; finished: boolean }) 
           {day.day}
           {finished && " ✓"}
         </span>
-        <span className="hidden font-label text-[11px] tracking-[0.1em] lg:block">{day.short}</span>
+        <span className="hidden font-label text-[10px] tracking-[0.06em] lg:block">{day.short}</span>
       </span>
     </>
   );
@@ -38,6 +39,7 @@ export default function WorkoutWeek({ mood, recipe, fontClass }: WorkoutWeekProp
   const [sets, setSets] = useState<Record<string, boolean[]>>({});
   const [rest, setRest] = useState<Record<number, string>>({});
   const [finished, setFinished] = useState<number[]>([]);
+  const [cardio, setCardio] = useState<Record<number, string | null>>({});
   const [open, setOpen] = useState<OpenExercise | null>(null);
 
   const setsFor = (exercise: string) => sets[exercise] ?? noSetsDone(SETS);
@@ -61,7 +63,7 @@ export default function WorkoutWeek({ mood, recipe, fontClass }: WorkoutWeekProp
             <Tabs
               label="Days of the week"
               listClassName="w-full"
-              tabClassName="flex-1"
+              tabClassName="min-w-0 flex-1 px-2!"
               tabs={WEEK.map((day) => ({
                 id: `day-${day.day}`,
                 label: <DayTabLabel day={day} finished={finished.includes(day.day)} />,
@@ -72,6 +74,8 @@ export default function WorkoutWeek({ mood, recipe, fontClass }: WorkoutWeekProp
                     onRestChange={(value) => setRest((current) => ({ ...current, [day.day]: value }))}
                     isDone={(exercise) => allDone(setsFor(exercise))}
                     onOpen={(exercise) => setOpen({ day: day.day, exercise })}
+                    cardioPick={cardio[day.day] ?? null}
+                    onCardioPick={(value) => setCardio((current) => ({ ...current, [day.day]: value }))}
                     finished={finished.includes(day.day)}
                     onFinish={() => setFinished((current) => (current.includes(day.day) ? current : [...current, day.day]))}
                   />

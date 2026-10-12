@@ -67,6 +67,19 @@ test("each cardio day shows the four options with their steps", () => {
   }
 });
 
+test("each cardio option is a button you can pick", () => {
+  const all = panels();
+  for (const day of WEEK.filter((each) => each.kind === "Cardio")) {
+    const buttons = [...all[day.day - 1].matchAll(/<button\b[^>]*>([\s\S]*?)<\/button>/g)].map(([, inner]) => text(inner));
+    for (const option of CARDIO_OPTIONS) {
+      assert.ok(
+        buttons.some((label) => label.includes(option.label) && label.includes(option.detail)),
+        `Day ${day.day}: ${option.label} isn't a button`,
+      );
+    }
+  }
+});
+
 test("the rest day shows the empty state and no Finish workout", () => {
   const panel = panels()[6];
   assert.match(panel, /data-ui-state="empty"/);
